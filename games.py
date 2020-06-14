@@ -27,6 +27,61 @@ def number_game():
     return rematch()
 
 
+# tic tac toe
+def tic_tac_toe():
+    board = {'Top-L': ' ', 'Top-M': ' ', 'Top-R': ' ',
+             'Mid-L': ' ', 'Mid-M': ' ', 'Mid-R': ' ',
+             'Bottom-L': ' ', 'Bottom-M': ' ', 'Bottom-R': ' '}
+
+    def generate_board():
+        print(board['Top-L'], '|', board['Top-M'], '|', board['Top-R'])
+        print(board['Mid-L'], '|', board['Mid-M'], '|', board['Mid-R'])
+        print(board['Bottom-L'], '|', board['Bottom-M'], "|", board['Bottom-R'])
+
+    def validate_choice(choice):
+        if choice in board.keys():
+            board[choice] = 'X'
+        else:
+            print('Please pick a valid code!')
+
+    def computer_play():
+        print('My turn now :)')
+        turn = 0
+
+        if turn == 0:
+            if board['Top-L'] == ' ':
+                board['Top-L'] = 'O'
+            else:
+                board['Top-R'] = 'O'
+            turn += 1
+        elif turn == 1:
+            if board['Mid-M'] == ' ':
+                board['Mid-M'] = 'O'
+            else:
+                board['Bottom-R'] = 'O'
+                turn += 1
+        else:
+            print("Game over :(")
+
+        generate_board()
+
+    def play():
+        print('Make your choice.')
+        choice = input()
+        validate_choice(choice)
+        generate_board()
+        computer_play()
+
+
+    def play_preamble():
+        print('I\'ll let you make the first move.')
+        generate_board()
+        print('Choose where to place an X by typing one of the following codes, each corresponding to one square on '
+              'the board: [Top-L], [Top-M], [Top-R], [Mid-L], [Mid-M], [Mid-R], [Bottom-L], [Bottom-M] OR [Bottom-R]')
+        play()
+
+    play_preamble()
+
 
 # game choice function
 def choose_game():
@@ -34,6 +89,8 @@ def choose_game():
     choice = int(input())
     if choice == 1:
         number_game()
+    elif choice == 2:
+        tic_tac_toe()
     else:
         print('Please input a valid number.')
         choose_game()
